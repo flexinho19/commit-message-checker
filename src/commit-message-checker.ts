@@ -64,16 +64,16 @@ export async function checkCommitMessages(
   }
 
   // Check messages
-  let result = true
+  let result = false
 
-  core.info(`Checking commit messages against "${args.pattern}"...`)
+  core.info(`Checking if at least one commit message matches against "${args.pattern}"...`)
 
   for (const message of args.messages) {
     if (checkMessage(message, args.pattern, args.flags)) {
       core.info(`- OK: "${message}"`)
+      result = true;
     } else {
       core.info(`- failed: "${message}"`)
-      result = false
     }
   }
 
